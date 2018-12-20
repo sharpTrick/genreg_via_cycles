@@ -11,7 +11,7 @@ genreg_via_cycles can be reliably used to create regular graphs where g<=5 and k
 
 genreg_via_cycles was built for the purpose of generating graphs for:
 - k between 1 and 4
-- g between 3 and 5
+- g between 3 and 6
 - n between 1 and 1000
 
 Obviously not all combinations of n, k and g will result in a graph.
