@@ -7,14 +7,12 @@ Where:
 - k is degree (edges per node)
 - g is the minimum girth
 
-genreg_via_cycles can be reliably used to create regular graphs where g<=5 and k<=5 for arbitrary values of n. Graphs constricted by more extreme arguments may take longer to generate than is reasonably useful depending on circumstances (assuming such a graph even exists).
+Graphs constricted by extreme arguments may take longer to generate than is reasonably useful depending on circumstances (assuming such a graph even exists).
 
-genreg_via_cycles was built for the purpose of generating graphs for:
+genreg_via_cycles was built for the purpose of quickly generating graphs for:
 - k between 1 and 4
 - g between 3 and 6
 - n between 1 and 1000
-
-Obviously not all combinations of n, k and g will result in a graph.
 
 Please see:
 - https://en.wikipedia.org/wiki/Regular_graph
