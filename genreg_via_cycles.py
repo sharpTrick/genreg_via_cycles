@@ -184,31 +184,49 @@ def validate_arguments(n, k, g):
         print("Impossible arguments: both n and k are odd")
         return False
 
-    if n <= k:
-        print("Impossible arguments: n <= k")
-        return False
-
-    if g == 4 and n < 2 * k:
-        print("Impossible arguments: g = 4 and n < 2k")
-        return False
-
-    if g == 5:
-        if k == 3 and n < 10:
-            print("Impossible arguments: g = 5, k = 3 and n < 10")
+    if g <= 3 or k <= 2:
+        if n < g or n <= k:
+            print("Impossible arguments: n <= k or n < g")
             return False
-        if k == 4 and n < 19:
-            print("Impossible arguments: g = 5, k = 4 and n < 19")
+        else:
+            return True
+
+    if g == 4:
+        if n < 2 * k:
+            print("Impossible arguments: n < 2k and g = 4")
             return False
-        if k == 5 and n < 30:
-            print("Impossible arguments: g = 5, k = 5 and n < 30")
+        return True
+
+    if k == 3:
+        if g == 5 and n < 10:
+            print("Impossible arguments: n < 10, k = 3 and g = 5")
             return False
 
-    if 6 <= g or 6 <= k:
-        print("Good luck: g >= 6 or k >= 6")
-        if k == 3:
+        elif g == 6 and n < 14:
+            print("Impossible arguments: n < 14, k = 3 and g = 6")
+            return False
+
+        else:
+            print("Good luck: k = 3 and g >= 7")
             print("see: https://hog.grinvin.org/Cubic")
             print("and http://staffhome.ecm.uwa.edu.au/~00013890/remote/cages/index.html")
-        elif k == 4:
+        return True
+
+    if k == 4:
+        if g == 5 and n < 19:
+            print("Impossible arguments: n < 19, k = 4 and g = 5")
+            return False
+
+        elif g == 6 and n < 26:
+            print("Impossible arguments: n < 26, k = 4 and g = 6")
+            return False
+
+        else:
+            print("Good luck: k = 4 and g >= 7")
             print("see: https://hog.grinvin.org/Quartic")
+        return True
+
+    print("Good luck: k >= 5 and g >= 5")
+    print("see: http://www.mathe2.uni-bayreuth.de/markus/reggraphs.html")
 
     return True
