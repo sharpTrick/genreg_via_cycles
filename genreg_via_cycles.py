@@ -122,63 +122,6 @@ def construct_adjacency_lists(n, k):
     return [[-1 for _ in range(k)] for _ in range(n)]
 
 
-def is_edge_valid(n, k, g, ni, nj, k_list, adjacency_lists, additional_edge_predicates=None):
-    # if nj has no edges there will be no issues
-    if k_list[nj] == 0 and 0 < k:
-        return True
-
-    # invalid if nj is already has the maximum edges allowed
-    if k <= k_list[nj]:
-        return False
-
-    if additional_edge_predicates:
-        for additional_edge_predicate in additional_edge_predicates:
-            if not additional_edge_predicate(n, k, g, ni, nj, k_list, adjacency_lists):
-                return False
-
-    # prime queues for breadth first traversal
-    source_nodes = []
-    target_nodes = []
-    for ki in range(k_list[ni]):
-        source_nodes.append(ni)
-        target_nodes.append(adjacency_lists[ni][ki])
-    source_nodes.append(ni)
-    target_nodes.append(nj)
-
-    # use a breadth first traversal to check for duplicate nodes to enforce girth
-    node_set = set()
-    edges_to_traverse = g // 2
-    even = g % 2 == 0
-    for iteration in range(edges_to_traverse):
-        # ignore duplicate nodes if girth is even and on the last iteration
-        ignore_if_duplicated = even and iteration == edges_to_traverse - 1
-
-        next_source_nodes = []
-        next_target_nodes = []
-        for i in range(len(source_nodes)):
-            source_node = source_nodes[i]
-            target_node = target_nodes[i]
-
-            if target_node in node_set:
-                return False
-
-            if not ignore_if_duplicated:
-                node_set.add(target_node)
-
-            if iteration < edges_to_traverse - 1:
-                # prepare children for next iteration
-                for ki in range(k_list[target_node]):
-                    next_target_node = adjacency_lists[target_node][ki]
-                    if next_target_node != source_node:
-                        next_source_nodes.append(target_node)
-                        next_target_nodes.append(next_target_node)
-
-        source_nodes = next_source_nodes
-        target_nodes = next_target_nodes
-
-    return True
-
-
 def validate_arguments(n, k, g):
     if n % 2 == 1 and k % 2 == 1:
         print("Impossible arguments: both n and k are odd")
@@ -198,14 +141,14 @@ def validate_arguments(n, k, g):
         return True
 
     if k == 3:
-        if g == 5 and n < 10:
-            print("Impossible arguments: n < 10, k = 3 and g = 5")
-            return False
-
-        elif g == 6 and n < 14:
-            print("Impossible arguments: n < 14, k = 3 and g = 6")
-            return False
-
+        if g == 5:
+            if n < 10:
+                print("Impossible arguments: n < 10, k = 3 and g = 5")
+                return False
+        elif g == 6:
+            if n < 14:
+                print("Impossible arguments: n < 14, k = 3 and g = 6")
+                return False
         else:
             print("Good luck: k = 3 and g >= 7")
             print("see: https://hog.grinvin.org/Cubic")
@@ -213,14 +156,14 @@ def validate_arguments(n, k, g):
         return True
 
     if k == 4:
-        if g == 5 and n < 19:
-            print("Impossible arguments: n < 19, k = 4 and g = 5")
-            return False
-
-        elif g == 6 and n < 26:
-            print("Impossible arguments: n < 26, k = 4 and g = 6")
-            return False
-
+        if g == 5:
+            if n < 19:
+                print("Impossible arguments: n < 19, k = 4 and g = 5")
+                return False
+        elif g == 6:
+            if n < 26:
+                print("Impossible arguments: n < 26, k = 4 and g = 6")
+                return False
         else:
             print("Good luck: k = 4 and g >= 7")
             print("see: https://hog.grinvin.org/Quartic")
