@@ -10,9 +10,9 @@ Where:
 Graphs constricted by extreme arguments may take longer to generate than is reasonably useful depending on circumstances (assuming such a graph even exists).
 
 genreg_via_cycles was built for the purpose of quickly generating graphs for:
-- k between 1 and 4
-- g between 3 and 6
 - n between 1 and 1000
+- k between 0 and 4
+- g between 3 and 6
 
 Please see:
 - https://en.wikipedia.org/wiki/Regular_graph
